@@ -1,0 +1,56 @@
+batchsize: 32
+batchsize_ul: 128
+iteration: 48000
+iteration_decay_start: 32000
+seed: 0
+display_interval: 100
+snapshot_interval: 8000
+evaluation_interval: 1000
+
+# For evaluation
+gamma: 0.01
+alpha: 0.01
+steps: 5
+loss_type: cross_entropy
+c_type: square
+clip_x: False
+
+models:
+   classifier:
+      fn: ./classifiers/cifar10cnn.py
+      name: CIFAR10Classifier
+      args:
+        n_classes: 10
+        activation: relu
+
+dataset:
+  dataset_fn: ./datasets/cifar10.py
+  dataset_name: CIFAR10SSDataset
+  args:
+     train: True
+     N_l: 4000
+
+dataset_eval:
+  dataset_fn: ./datasets/cifar10.py
+  dataset_name: CIFAR10Dataset
+  args:
+     train: False
+
+adam:
+  alpha: 0.001
+  beta1: 0.9
+  beta2: 0.999
+
+updater:
+  fn: ./updater.py
+  name: Updater
+  args:
+    method: ssdrl
+    gamma: 0.01
+    alpha: 0.01
+    steps: 5
+    loss_type: cross_entropy
+    c_type: square
+    clip_x: False
+    lamb: -1
+    max_classes: 1

@@ -1,0 +1,56 @@
+batchsize: 64
+batchsize_ul: 64
+iteration: 50000
+iteration_decay_start: 40000
+seed: 0
+display_interval: 100
+snapshot_interval: 10000
+evaluation_interval: 100
+
+# For evaluation
+gamma: 1
+alpha: 10
+steps: 5
+loss_type: cross_entropy
+c_type: square
+clip_x: True
+
+models:
+   classifier:
+      fn: ./classifiers/mnistcnn.py
+      name: MNISTClassifier
+      args:
+        n_classes: 10
+        activation: elu
+
+dataset:
+  dataset_fn: ./datasets/mnist.py
+  dataset_name: MNISTSSDataset
+  args:
+     train: True
+     N_l: 1000
+
+dataset_eval:
+  dataset_fn: ./datasets/mnist.py
+  dataset_name: MNISTDataset
+  args:
+     train: False
+
+adam:
+  alpha: 0.001
+  beta1: 0.9
+  beta2: 0.999
+
+updater:
+  fn: ./updater.py
+  name: Updater
+  args:
+    method: ssdrl
+    gamma: 1
+    alpha: 10
+    steps: 5
+    loss_type: cross_entropy
+    c_type: square
+    clip_x: True
+    lamb: -1
+    max_classes: 1

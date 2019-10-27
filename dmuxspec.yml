@@ -1,0 +1,29 @@
+version: 0
+os: ubuntu==16.04
+features:
+- cuda==8.0
+- python==3.5.2
+- chainer==4.1.0
+- chainermn==1.3.0
+- cudnn==7.0
+- nccl==2.1.4
+- cupy==4.1.0
+- pip:pillow==3.3.1
+- pip:scipy==1.1.0
+- openmpi==2.1
+- mpi4py==3.0.0
+- pip:pyyaml==3.12
+
+hardware:
+- cpu==4
+- gpu==1
+- ram==20000 # MB
+- disk==5000 # MB
+datasets:
+- ssdrl_mnist_models==3 @ /home/user/mnist_models
+- ssdrl_svhn_models==3 @ /home/user/svhn_models
+- ssdrl_cifar10_models==3 @ /home/user/cifar10_models
+- ssdrl_mnist==1 @ /home/user/.chainer/dataset/pfnet/chainer/mnist
+- cifar10_miyato==1 @ /home/user/.chainer/dataset/pfnet/chainer/cifar
+- svhn_miyato==1 @ /home/user/.chainer/dataset/pfnet/chainer/svhn
+- cifar10_zca==3 @ /home/user/cifar10_zca
